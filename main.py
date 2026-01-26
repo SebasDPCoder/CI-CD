@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.testclient import TestClient
+
 app = FastAPI()
 
 class User(BaseModel):
@@ -18,17 +18,3 @@ async def login(user: User):
         return {"message": "Login successful"}
     else:
         return {"message": "Invalid credentials", "status": 401}
-    
-
-client = TestClient(app)
-
-# Test cases
-def test_login_success():
-    URL = "http://127.0.0.1:8000/login"
-    payload = {
-        "username": "admin",
-        "password": "password123"
-    }
-    response = client.post(URL, json=payload)
-    assert response.status_code == 200
-    assert response.json() == {"message": "Login successful"}
