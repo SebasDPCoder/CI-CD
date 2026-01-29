@@ -1,9 +1,10 @@
-name:  Prueba pipeline
+name: Prueba pipeline
 
 on: 
   push:
     branches: 
-      - master
+      - main
+  pull_request:
 
 jobs:
   build:
@@ -22,7 +23,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-        
-      - name: Run tests
+
+      - name: Run tests with coverage
         run: |
-          pytest test_main.py
+          pip install pytest pytest-cov
+          pytest --cov=. --cov-report=xml test_main.py
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=SebasDPCoder_CI-CD
+            -Dsonar.organization=sebasdpcoder
+            -Dsonar.sources=.
+            -Dsonar.python.coverage.reportPaths=coverage.xml
