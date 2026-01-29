@@ -1,6 +1,4 @@
-from urllib import response
 from fastapi.testclient import TestClient
-from mdurl import URL
 from main import app
 
 client = TestClient(app)
