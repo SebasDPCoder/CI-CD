@@ -124,7 +124,6 @@ jobs:
           args: >
             -Dsonar.projectKey=SebasDPCoder_CI-CD
             -Dsonar.organization=sebasdpcoder
-            -Dsonar.sources=src
-            -Dsonar.tests=tests
+            -Dsonar.sources=.
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.qualitygate.wait=true
