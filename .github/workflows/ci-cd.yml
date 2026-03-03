@@ -37,10 +37,10 @@ jobs:
           pip install ruff black
 
       - name: Run Ruff
-        run: ruff check src tests
+        run: ruff check .
 
       - name: Run Black (format check)
-        run: black --check src tests
+        run: black --check .
 
 
   # =========================
